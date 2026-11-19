@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/conexao.php';
+require_once __DIR__ . '/config/conexao.php';
 
 $sucesso = "";
 $erro = "";
@@ -27,52 +27,54 @@ $sql = "SELECT m.*, p.nome AS produto, u.nome AS usuario
         ORDER BY m.id_movimentacao DESC";
 $movimentacoes = $pdo->query($sql)->fetchAll();
 ?>
-    <main class="flex-1 flex flex-col">
+<main class="flex-1 flex flex-col">
 
-        <div class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-            <div>
-                <h1 class="text-xl font-extrabold text-gray-800">Movimentações</h1>
-                <p class="text-sm text-gray-500">Entradas e saídas de produtos do estoque</p>
-            </div>
-            <a href="movimentacao_form.php" class="bg-senai-green text-white font-bold px-4 py-2.5 rounded-lg text-sm hover:bg-green-600 transition flex items-center gap-2">
-                + Nova Movimentação
-            </a>
+    <div class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+        <div>
+            <h1 class="text-xl font-extrabold text-gray-800">Movimentações</h1>
+            <p class="text-sm text-gray-500">Entradas e saídas de produtos do estoque</p>
         </div>
+        <a href="movimentacao_form.php" class="bg-senai-green text-white font-bold px-4 py-2.5 rounded-lg text-sm hover:bg-green-600 transition flex items-center gap-2">
+            + Nova Movimentação
+        </a>
+    </div>
 
-        <div class="p-6 flex-1">
+    <div class="p-6 flex-1">
 
-            <?php if (!empty($sucesso)): ?>
-                <div class="bg-green-50 border border-green-300 text-green-700 rounded-lg p-3 mb-5 flex items-center gap-2 text-sm">
-                    <span class="font-bold text-base">✓</span>
-                    <span><?= $sucesso ?></span>
-                    <button onclick="this.parentElement.remove()" class="ml-auto text-green-400 hover:text-green-700 text-lg leading-none">×</button>
-                </div>
-            <?php endif; ?>
+        <?php if (!empty($sucesso)): ?>
+            <div class="bg-green-50 border border-green-300 text-green-700 rounded-lg p-3 mb-5 flex items-center gap-2 text-sm">
+                <span class="font-bold text-base">✓</span>
+                <span><?= $sucesso ?></span>
+                <button onclick="this.parentElement.remove()" class="ml-auto text-green-400 hover:text-green-700 text-lg leading-none">×</button>
+            </div>
+        <?php endif; ?>
 
-            <?php if (!empty($erro)): ?>
-                <div class="bg-red-50 border border-red-300 text-red-700 rounded-lg p-3 mb-5 flex items-center gap-2 text-sm">
-                    <span class="font-bold text-base">!</span>
-                    <span><?= $erro ?></span>
-                    <button onclick="this.parentElement.remove()" class="ml-auto text-red-400 hover:text-red-700 text-lg leading-none">×</button>
-                </div>
-            <?php endif; ?>
+        <?php if (!empty($erro)): ?>
+            <div class="bg-red-50 border border-red-300 text-red-700 rounded-lg p-3 mb-5 flex items-center gap-2 text-sm">
+                <span class="font-bold text-base">!</span>
+                <span><?= $erro ?></span>
+                <button onclick="this.parentElement.remove()" class="ml-auto text-red-400 hover:text-red-700 text-lg leading-none">×</button>
+            </div>
+        <?php endif; ?>
 
-            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                <table class="w-full text-sm">
-                    <thead class="bg-senai-blue text-white">
-                        <tr>
-                            <th class="px-4 py-3 text-left">Produto</th>
-                            <th class="px-4 py-3 text-center">Tipo</th>
-                            <th class="px-4 py-3 text-center">Quantidade</th>
-                            <th class="px-4 py-3 text-center">Data</th>
-                            <th class="px-4 py-3 text-center">Usuário</th>
-                            <th class="px-4 py-3 text-center">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-100">
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+            <table class="w-full text-sm">
+                <thead class="bg-senai-blue text-white">
+                    <tr>
+                        <th class="px-4 py-3 text-left">Produto</th>
+                        <th class="px-4 py-3 text-center">Tipo</th>
+                        <th class="px-4 py-3 text-center">Quantidade</th>
+                        <th class="px-4 py-3 text-center">Data</th>
+                        <th class="px-4 py-3 text-center">Usuário</th>
+                        <th class="px-4 py-3 text-center">Ações</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
 
                     <?php if (!$movimentacoes): ?>
-                        <tr><td colspan="6" class="px-4 py-6 text-center text-gray-400">Nenhuma movimentação encontrada!</td></tr>
+                        <tr>
+                            <td colspan="6" class="px-4 py-6 text-center text-gray-400">Nenhuma movimentação encontrada!</td>
+                        </tr>
                     <?php endif; ?>
 
                     <?php foreach ($movimentacoes as $m): ?>
@@ -96,16 +98,17 @@ $movimentacoes = $pdo->query($sql)->fetchAll();
                         </tr>
                     <?php endforeach; ?>
 
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
 
-                <div class="border-t border-gray-100 px-4 py-3 bg-gray-50">
-                    <p class="text-xs text-gray-400">Exibindo <?= count($movimentacoes) ?> movimentações</p>
-                </div>
+            <div class="border-t border-gray-100 px-4 py-3 bg-gray-50">
+                <p class="text-xs text-gray-400">Exibindo <?= count($movimentacoes) ?> movimentações</p>
             </div>
-
         </div>
-    </main>
+
+    </div>
+</main>
 
 </body>
+
 </html>

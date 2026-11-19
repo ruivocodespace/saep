@@ -1,39 +1,41 @@
 <?php
 session_start();
-require_once __DIR__ . '/conexao.php';
+require_once __DIR__ . '/config/conexao.php';
 require_once __DIR__ . '/includes/menu.php';
 
 $produtos = $pdo->query("SELECT * FROM produto ORDER BY quantidade_estoque, nome")->fetchAll();
 ?>
-    <main class="flex-1 flex flex-col">
+<main class="flex-1 flex flex-col">
 
-        <div class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-            <div>
-                <h1 class="text-xl font-extrabold text-gray-800">Verificar Estoque</h1>
-                <p class="text-sm text-gray-500">Quantidade disponível de cada produto</p>
-            </div>
-            <a href="movimentacao_form.php" class="bg-senai-green text-white font-bold px-4 py-2.5 rounded-lg text-sm hover:bg-green-600 transition flex items-center gap-2">
-                + Nova Movimentação
-            </a>
+    <div class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+        <div>
+            <h1 class="text-xl font-extrabold text-gray-800">Verificar Estoque</h1>
+            <p class="text-sm text-gray-500">Quantidade disponível de cada produto</p>
         </div>
+        <a href="movimentacao_form.php" class="bg-senai-green text-white font-bold px-4 py-2.5 rounded-lg text-sm hover:bg-green-600 transition flex items-center gap-2">
+            + Nova Movimentação
+        </a>
+    </div>
 
-        <div class="p-6 flex-1">
+    <div class="p-6 flex-1">
 
-            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                <table class="w-full text-sm">
-                    <thead class="bg-senai-blue text-white">
-                        <tr>
-                            <th class="px-4 py-3 text-left">Produto</th>
-                            <th class="px-4 py-3 text-center">Valor unitário</th>
-                            <th class="px-4 py-3 text-center">Quantidade</th>
-                            <th class="px-4 py-3 text-center">Situação</th>
-                            <th class="px-4 py-3 text-center">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-100">
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+            <table class="w-full text-sm">
+                <thead class="bg-senai-blue text-white">
+                    <tr>
+                        <th class="px-4 py-3 text-left">Produto</th>
+                        <th class="px-4 py-3 text-center">Valor unitário</th>
+                        <th class="px-4 py-3 text-center">Quantidade</th>
+                        <th class="px-4 py-3 text-center">Situação</th>
+                        <th class="px-4 py-3 text-center">Ações</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
 
                     <?php if (!$produtos): ?>
-                        <tr><td colspan="5" class="px-4 py-6 text-center text-gray-400">Nenhum produto encontrado!</td></tr>
+                        <tr>
+                            <td colspan="5" class="px-4 py-6 text-center text-gray-400">Nenhum produto encontrado!</td>
+                        </tr>
                     <?php endif; ?>
 
                     <?php foreach ($produtos as $p): ?>
@@ -56,16 +58,17 @@ $produtos = $pdo->query("SELECT * FROM produto ORDER BY quantidade_estoque, nome
                         </tr>
                     <?php endforeach; ?>
 
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
 
-                <div class="border-t border-gray-100 px-4 py-3 bg-gray-50">
-                    <p class="text-xs text-gray-400">Exibindo <?= count($produtos) ?> produtos</p>
-                </div>
+            <div class="border-t border-gray-100 px-4 py-3 bg-gray-50">
+                <p class="text-xs text-gray-400">Exibindo <?= count($produtos) ?> produtos</p>
             </div>
-
         </div>
-    </main>
+
+    </div>
+</main>
 
 </body>
+
 </html>
