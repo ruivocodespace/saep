@@ -1,5 +1,7 @@
 <?php
 require_once "../config/conexao.php";
+$erro = isset($_GET["erro"]);
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -69,6 +71,11 @@ require_once "../config/conexao.php";
         </div>
 
         <form action="autenticar.php" method="POST" class="p-6 space-y-4">
+            <?php if ($erro): ?>
+                <div class="bg-red-50 border border-red-300 text-red-700 rounded-lg p-3 text-sm">
+                    E-mail ou senha inválidos!
+                </div>
+            <?php endif; ?>
             <div>
                 <label for="email" class="form-label">E-mail</label>
                 <input

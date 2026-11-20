@@ -1,0 +1,20 @@
+PLANO DE TESTES – SISTEMA
+
+Cenários de teste
+
+Cenário 1 – Bloquear operação 
+Procedimento: Fazer uma movimentação de “saída”, colocar q quantidade maior que saldo disponível.
+Resultado esperado: O sistema deve bloquear a operação e mostrar erro de saída não permitida.
+Resultado obtido: Resultado: Aprovado
+
+
+Cenário 2 – Login inválido
+Procedimento: Informar senha incorreta ou usuário inexistente.
+Resultado esperado: O sistema deve impedir o acesso e apresentar uma mensagem de erro.
+Resultado obtido: Resultado: Aprovado
+
+
+Cenário 3 – Entrada de estoque
+Procedimento: Registrar uma entrada com quantidade válida.
+Resultado esperado: A movimentação deve ser registrada como entrada e o estoque disponível deve aumentar pela quantidade informada.
+Resultado obtido: Resultado: Aprovado

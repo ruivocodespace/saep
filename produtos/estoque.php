@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once __DIR__ . '/config/conexao.php';
-require_once __DIR__ . '/includes/menu.php';
+require_once "../config/conexao.php";
+require_once "../includes/menu.php";
 
 $produtos = $pdo->query("SELECT * FROM produto ORDER BY quantidade_estoque, nome")->fetchAll();
 ?>
@@ -12,7 +12,7 @@ $produtos = $pdo->query("SELECT * FROM produto ORDER BY quantidade_estoque, nome
             <h1 class="text-xl font-extrabold text-gray-800">Verificar Estoque</h1>
             <p class="text-sm text-gray-500">Quantidade disponível de cada produto</p>
         </div>
-        <a href="movimentacao_form.php" class="bg-senai-green text-white font-bold px-4 py-2.5 rounded-lg text-sm hover:bg-green-600 transition flex items-center gap-2">
+        <a href="../movimentacao/movimentacao_form.php" class="bg-senai-green text-white font-bold px-4 py-2.5 rounded-lg text-sm hover:bg-green-600 transition flex items-center gap-2">
             + Nova Movimentação
         </a>
     </div>
@@ -52,7 +52,7 @@ $produtos = $pdo->query("SELECT * FROM produto ORDER BY quantidade_estoque, nome
                             </td>
                             <td class="px-4 py-3 text-center">
                                 <div class="flex items-center justify-center gap-1.5">
-                                    <a href="movimentacao_form.php?id_produto=<?= $p["id_produto"] ?>" class="bg-yellow-500 text-white text-xs px-2.5 py-1.5 rounded-md hover:bg-yellow-600 transition" title="Movimentar estoque">🔄 Movimentar</a>
+                                    <a href="movimentacao/movimentacao_form.php?id_produto=<?= $p["id_produto"] ?>" class="bg-yellow-500 text-white text-xs px-2.5 py-1.5 rounded-md hover:bg-yellow-600 transition" title="Movimentar estoque">🔄 Movimentar</a>
                                 </div>
                             </td>
                         </tr>

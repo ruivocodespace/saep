@@ -1,10 +1,11 @@
 <?php
 session_start();
-require_once __DIR__ . '/config/conexao.php';
+require_once "../config/conexao.php";
+require_once "../includes/menu.php";
 
 $erro = "";
 
-$id_produto = (int) ($_GET["id_produto"] ?? 0);
+$id_produto = (int) ($_GET["id"] ?? 0);
 $tipo       = "ENTRADA";
 $quantidade = "";
 $id_user    = 0;
@@ -16,11 +17,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $quantidade = (int) ($_POST["quantidade"] ?? 0);
     $id_user    = (int) ($_POST["id_user"] ?? 0);
 
-    $st = $pdo->prepare("SELECT quantidade_estoque FROM produto WHERE id_produto = ?");
+    $st = $pdo->prepare("SELECT quantidade_estoque FROM produto WHERE id = ?");
     $st->execute([$id_produto]);
     $produto = $st->fetch();
 
-    $st = $pdo->prepare("SELECT id_user FROM `user` WHERE id_user = ?");
+    $st = $pdo->prepare("SELECT id FROM `user` WHERE id = ?");
     $st->execute([$id_user]);
     $user = $st->fetch();
 
@@ -44,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // ENTRADA soma no estoque, SAIDA subtrai
         $delta = $tipo === "ENTRADA" ? $quantidade : -$quantidade;
-        $st = $pdo->prepare("UPDATE produto SET quantidade_estoque = quantidade_estoque + ? WHERE id_produto = ?");
+        $st = $pdo->prepare("UPDATE produto SET quantidade_estoque = quantidade_estoque + ? WHERE id = ?");
         $st->execute([$delta, $id_produto]);
 
         header("Location: movimentacoes.php?salvo=" . strtolower($tipo));
@@ -52,10 +53,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-$produtos = $pdo->query("SELECT id_produto, nome, quantidade_estoque FROM produto ORDER BY nome")->fetchAll();
-$usuarios = $pdo->query("SELECT id_user, nome FROM `user` ORDER BY nome")->fetchAll();
+$produtos = $pdo->query("SELECT id, nome, quantidade_estoque FROM produto ORDER BY nome")->fetchAll();
+$usuarios = $pdo->query("SELECT id, nome FROM `user` ORDER BY nome")->fetchAll();
 
-require_once __DIR__ . '/includes/menu.php';
+
 ?>
 <main class="flex-1 flex flex-col">
     <div class="bg-white border-b border-gray-200 px-6 py-4">
@@ -80,7 +81,7 @@ require_once __DIR__ . '/includes/menu.php';
                     <select name="id_produto" class="form-input" required>
                         <option value="">Selecione o produto</option>
                         <?php foreach ($produtos as $p): ?>
-                            <option value="<?= $p["id_produto"] ?>" <?= $p["id_produto"] == $id_produto ? "selected" : "" ?>><?= htmlspecialchars($p["nome"]) ?> (estoque: <?= $p["quantidade_estoque"] ?>)</option>
+                            <option value="<?= $p["id"] ?>" <?= $p["id"] == $id_produto ? "selected" : "" ?>><?= htmlspecialchars($p["nome"]) ?> (estoque: <?= $p["quantidade_estoque"] ?>)</option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -100,7 +101,7 @@ require_once __DIR__ . '/includes/menu.php';
                     <select name="id_user" class="form-input" required>
                         <option value="">Selecione o usuário</option>
                         <?php foreach ($usuarios as $u): ?>
-                            <option value="<?= $u["id_user"] ?>" <?= $u["id_user"] == $id_user ? "selected" : "" ?>><?= htmlspecialchars($u["nome"]) ?></option>
+                            <option value="<?= $u["id"] ?>" <?= $u["id"] == $id_user ? "selected" : "" ?>><?= htmlspecialchars($u["nome"]) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

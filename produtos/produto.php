@@ -1,12 +1,12 @@
 <?php
 session_start();
-require_once __DIR__ . '/config/conexao.php';
+require_once "../config/conexao.php";
 
 $st = $pdo->prepare("SELECT * FROM produto WHERE id_produto = :id");
 $st->execute(["id" => $_GET["id"] ?? 0]);
 $produto = $st->fetch();          // false se não encontrou
 
-require_once __DIR__ . '/includes/menu.php';
+require_once "../includes/menu.php";
 ?>
 <main class="flex-1 flex flex-col">
     <div class="bg-white border-b border-gray-200 px-6 py-4">
@@ -49,7 +49,7 @@ require_once __DIR__ . '/includes/menu.php';
 
                 <div class="flex gap-2">
                     <a href="movimentacao_form.php?id_produto=<?= $produto["id_produto"] ?>" class="bg-senai-blue text-white font-bold px-5 py-2.5 rounded-lg text-sm hover:bg-senai-blue-dark transition">🔄 Movimentar estoque</a>
-                    <a href="produtos.php" class="bg-gray-100 text-gray-600 font-semibold px-5 py-2.5 rounded-lg text-sm hover:bg-gray-200 transition">Voltar</a>
+                    <a href="listar.php" class="bg-gray-100 text-gray-600 font-semibold px-5 py-2.5 rounded-lg text-sm hover:bg-gray-200 transition">Voltar</a>
                 </div>
             </div>
         <?php endif; ?>

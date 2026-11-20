@@ -30,7 +30,8 @@ try {
 
     // Verifica se o usuário existe e se a senha está correta
     if (!$usuario || !password_verify($senha, $usuario['senha'])) {
-        exit('E-mail ou senha incorretos.');
+        header("Location: login.php?erro=1");
+        exit;;
     }
 
     // Gera um novo identificador de sessão

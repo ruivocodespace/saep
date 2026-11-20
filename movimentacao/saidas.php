@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/config/conexao.php';
+require_once "../config/conexao.php";
 require_once __DIR__ . '/includes/menu.php';
 
 $sql = "SELECT m.quantidade, m.datetime_movimentacao, p.nome AS produto, u.nome AS usuario

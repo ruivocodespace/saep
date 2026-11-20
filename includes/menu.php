@@ -93,12 +93,12 @@ $ativo = function ($prefixo) use ($pagina) {
             <p class="text-gray-500 text-xs">Painel Administrativo</p>
         </div>
         <nav class="flex-1 p-3 space-y-1 pt-4">
-            <a href="index.php" class="nav-link <?= $ativo('index') ?>">📊 Dashboard</a>
-            <a href="produtos.php" class="nav-link <?= $ativo('produto') ?>">🧴 Produtos</a>
-            <a href="estoque.php" class="nav-link <?= $ativo('estoque') ?>">📋 Verificar Estoque</a>
-            <a href="movimentacoes.php" class="nav-link <?= $ativo('movimentac') ?>">🔄 Movimentações</a>
-            <a href="saidas.php" class="nav-link <?= $ativo('saidas') ?>">📤 Saídas</a>
-            <a href="usuarios/listar.php" class="nav-link <?= $ativo('listar') ?>">🪪 Usuários</a>
-            <a href="logout.php" class="nav-link <?= $ativo('logout') ?>">🔚 Logout</a>
+            <a href="http://localhost:8080/saep/index.php" class="nav-link <?= $ativo('index') ?>">📊 Dashboard</a>
+            <a href="http://localhost:8080/saep/produtos/listar.php" class="nav-link <?= $ativo('produto') ?>">🧴 Produtos</a>
+            <a href="http://localhost:8080/saep/produtos/estoque.php" class="nav-link <?= $ativo('estoque') ?>">📋 Verificar Estoque</a>
+            <a href="http://localhost:8080/saep/movimentacao/movimentacoes.php" class="nav-link <?= $ativo('movimentacao') ?>">🔄 Movimentações</a>
+            <a href="http://localhost:8080/saep/movimentacao/saidas.php" class="nav-link <?= $ativo('saidas') ?>">📤 Saídas</a>
+            <a href="http://localhost:8080/saep//listar.php" class="nav-link <?= $ativo('listar') ?>">🪪 Usuários</a>
+            <a href="http://localhost:8080/saep//logout.php" class="nav-link <?= $ativo('logout') ?>">🔚 Logout</a>
         </nav>
     </aside>

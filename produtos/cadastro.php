@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/config/conexao.php';
+require_once "../config/conexao.php";
 
 $erro = "";
 
@@ -32,12 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $st = $pdo->prepare("INSERT INTO produto (nome, quantidade_estoque, valor_unitario, data_cadastro) VALUES (?, ?, ?, ?)");
         $st->execute([$nome, (int) $quantidade, (float) $valor, $data]);
 
-        header("Location: produtos.php?salvo=1");     // redireciona após gravar
+        header("Location: cadastro.php?salvo=1");     // redireciona após gravar
         exit;
     }
 }
 
-require_once __DIR__ . '/includes/menu.php';
+require_once "../includes/menu.php";
 ?>
 <main class="flex-1 flex flex-col">
     <div class="bg-white border-b border-gray-200 px-6 py-4">
@@ -76,7 +76,7 @@ require_once __DIR__ . '/includes/menu.php';
 
                 <div class="flex gap-2">
                     <button type="submit" class="bg-senai-blue text-white font-bold px-5 py-2.5 rounded-lg text-sm hover:bg-senai-blue-dark transition">💾 Salvar</button>
-                    <a href="produtos.php" class="bg-gray-100 text-gray-600 font-semibold px-5 py-2.5 rounded-lg text-sm hover:bg-gray-200 transition">Cancelar</a>
+                    <a href="cadastro.php" class="bg-gray-100 text-gray-600 font-semibold px-5 py-2.5 rounded-lg text-sm hover:bg-gray-200 transition">Cancelar</a>
                 </div>
             </form>
         </div>
